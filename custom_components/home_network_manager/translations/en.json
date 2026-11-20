@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Home Network Manager",
+        "description": "Create a key in Home Network Manager under Admin → Settings → Home Assistant, then enter the server's address and the key.",
+        "data": {
+          "url": "Server URL",
+          "api_key": "Key"
+        },
+        "data_description": {
+          "url": "The address you open Home Network Manager at in a browser.",
+          "api_key": "The key shown once when it was created. It starts with nm_ha_."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate Home Network Manager",
+        "description": "{url} rejected the stored key; it was probably replaced or removed. Create a new key under Admin → Settings → Home Assistant and enter it here.",
+        "data": {
+          "api_key": "Key"
+        },
+        "data_description": {
+          "api_key": "The key shown once when it was created. It starts with nm_ha_."
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Home Network Manager",
+        "description": "Change the server's address or the key.",
+        "data": {
+          "url": "Server URL",
+          "api_key": "Key"
+        },
+        "data_description": {
+          "url": "The address you open Home Network Manager at in a browser.",
+          "api_key": "The key shown once when it was created. It starts with nm_ha_."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the server.",
+      "invalid_auth": "The server rejected the key.",
+      "invalid_url": "Enter an http or https address.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This server is already configured.",
+      "reauth_successful": "Reauthentication was successful.",
+      "reconfigure_successful": "Reconfiguration was successful.",
+      "unique_id_mismatch": "The server at this address is not the configured one."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "connected": {
+        "name": "Connected"
+      }
+    },
+    "sensor": {
+      "last_update": {
+        "name": "Last update"
+      }
+    }
+  }
+}
