@@ -1,0 +1,34 @@
+# Runs on the GitHub mirror only (HACS installs from GitHub); tests run in the source repository's pipeline.
+#
+# HACS validates the latest release, and CI creates that release right after pushing main, so the HACS check runs
+# when a release is published (and weekly), never on the push itself: it would check the previous release.
+name: Validate
+
+on:
+  push:
+  release:
+    types: [published]
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hassfest:
+    name: hassfest
+    if: github.event_name != 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    name: HACS
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hacs/action@main
+        with:
+          category: integration
